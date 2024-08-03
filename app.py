@@ -23,7 +23,7 @@ def extract_timestamp(frame, x=0, y=0, w=850, h=50):
         print("Extracted Text:", candidate_str)
         cropped_img_path = "./assets/cropped_img.png"
         cv2.imwrite(cropped_img_path, timestamp_crop)
-        st.image(cropped_img_path)
+        # st.image(cropped_img_path)
         regex_str = r'Date:\s(\d{4}-\d{2}-\d{2})\sTime:\s(\d{2}:\d{2}:\d{2}\s(?:AM|PM))\sFrame:\s(\d{2}:\d{2}:\d{2}:\d{2})'
         match = re.search(regex_str, candidate_str)
         
