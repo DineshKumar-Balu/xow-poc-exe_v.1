@@ -55,9 +55,10 @@ def get_video_end_time(video_path):
     return timestamp[1] if timestamp else "00:00:00 AM"
 
 def convert_to_h264(input_video_path, output_video_path):
-    # ffmpeg_path = os.path.join(os.path.dirname(__file__),"ffmpeg-7.0.1", "ffmpeg.exe")
+    ffmpeg_path = os.path.join(os.path.dirname(__file__), "ffmpeg", "bin", "ffmpeg.exe")
+    print(f"FFmpeg path: {ffmpeg_path}") 
     command = [
-        'ffmpeg', '-y',
+        ffmpeg_path, '-y',
         '-i', input_video_path,
         '-c:v', 'libx264',
         output_video_path
