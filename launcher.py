@@ -2,12 +2,9 @@ import subprocess
 import os
 import sys
 import logging
-
-# Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 def run_command(command, shell=False):
-    """Run a command and log the output."""
     logging.info(f"Running command: {command}")
     result = subprocess.run(command, shell=shell, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     logging.info(f"STDOUT: {result.stdout.decode()}")
@@ -16,13 +13,8 @@ def run_command(command, shell=False):
         raise RuntimeError(f"Command failed with exit code {result.returncode}")
 
 def main():
-    # Create a virtual environment
     run_command("python -m venv ./env")
-
-    # Activate the virtual environment and install packages
     activate_script = ".\\env\\Scripts\\activate.bat"
-
-    # Create a batch file to activate the environment and run the commands
     batch_script = "temp_script.bat"
     with open(batch_script, "w") as file:
         file.write(f"@echo off\n")
@@ -31,10 +23,7 @@ def main():
         file.write(f"pip install -r requirements.txt\n")
         file.write(f"streamlit run app.py\n")
 
-    # Run the batch script
     run_command(batch_script, shell=True)
-
-    # Clean up the temporary batch file
     os.remove(batch_script)
 
 if __name__ == "__main__":
